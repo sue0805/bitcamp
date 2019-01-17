@@ -13,6 +13,7 @@
 
 	UserDAO dao = new UserDAO();  
 	List<User> list = dao.getUserList();
+	request.setAttribute("user", list);
 %>
     
 <!DOCTYPE html>

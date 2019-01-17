@@ -21,6 +21,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <style>
 	table{
 		margin: 30px auto;
@@ -52,7 +53,7 @@
 				<th>DEPTNO</th>
 				<th>관리</th>
 			</tr>
-			<c:forEach items="${list}" var="emp" varStatus="status">
+			<c:forEach items="${list}" var="emp">
 				<tr>
 					<td>${emp.empno }</td>
 					<td>${emp.ename }</td>
@@ -62,10 +63,24 @@
 					<td>${emp.sal }</td>
 					<td>${emp.comm }</td>
 					<td>${emp.deptno }</td>
-					<td><a href="#" class="modify" onclick="modify(${status.index})">수정</a> <a href="#" class="remove" onclick="remove(${status.index})">삭제</a></td>
+					<td><a href="#" class="modify" onclick="modify(${emp.empno})">수정</a> <a href="#" class="remove" onclick="remove(${emp.empno})">삭제</a></td>
 				</tr>
 			</c:forEach>
 		</table>
 	</section>
+	<script>
+		function modify(no){
+			var popUrl = 'editEmp.jsp?empno='+no;
+			var popOption = 'width=370, height=400, resizable=no, scrollbars=no, status=no'
+			window.open(popUrl, "", popOption);
+		}
+		
+		function remove(no){
+			var del = confirm('삭제하시겠습니까?');
+			if(del == true){
+				location.href = 'removeEmpAction.jsp?empno='+no;
+			}
+		}
+	</script>
 </body>
 </html>

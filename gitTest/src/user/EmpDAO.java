@@ -72,32 +72,38 @@ public class EmpDAO {
 		return result;
 	}
 	
-	public int updateEmp(String newName, String oldName) {
+	public int updateEmp(Emp e, int empno) {
 		int result = -1;
-		
-		String query = "UPDATE EMP SET ENAME=? WHERE ENAME=?";
+		String query = "UPDATE EMP SET EMPNO=?, ENAME=?, JOB=?, MGR=?, HIREDATE=?, SAL=?, COMM=?, DEPTNO=? WHERE EMPNO=?";
 		
 		try {
 			pstmt = conn.prepareStatement(query);
-			pstmt.setString(1, newName);
-			pstmt.setString(2, oldName);
+			pstmt.setInt(1, Integer.parseInt(e.getEmpno()));
+			pstmt.setString(2, e.getEname());
+			pstmt.setString(3, e.getJob());
+			pstmt.setInt(4, Integer.parseInt(e.getMgr()));
+			pstmt.setDate(5, Date.valueOf(e.getHiredate()));
+			pstmt.setInt(6, Integer.parseInt(e.getSal()));
+			pstmt.setInt(7, Integer.parseInt(e.getComm()));
+			pstmt.setInt(8, Integer.parseInt(e.getDeptno()));
 			
+			pstmt.setInt(9, empno);
 			result = pstmt.executeUpdate();
-		} catch (SQLException e) {
-			e.printStackTrace();
+		} catch (SQLException ex) {
+			ex.printStackTrace();
 		}
-		
+		System.out.println(result);
 		return result;
 	}
 	
-	public int deleteEmp(String name) {
+	public int deleteEmp(String empno) {
 		int result = -1;
 		
-		String query = "DELETE FROM EMP WHERE ENAME=?";
+		String query = "DELETE FROM EMP WHERE EMPNO=?";
 		
 		try {
 			pstmt = conn.prepareStatement(query);
-			pstmt.setString(1, name);
+			pstmt.setInt(1, Integer.parseInt(empno));
 			
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {

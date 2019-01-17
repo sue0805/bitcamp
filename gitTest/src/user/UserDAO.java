@@ -98,7 +98,6 @@ public class UserDAO {
 			rs = pstmt.executeQuery();
 			if(rs.next()) {
 				String pw = rs.getString(1);
-				System.out.println(pw);
 				if(pw.equals(password)) {
 					result = 1;
 				}
