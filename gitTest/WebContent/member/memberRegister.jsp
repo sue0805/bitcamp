@@ -1,5 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%	
+	if(session.getAttribute("login")==null){
+		request.setAttribute("msg", "로그인 후 사용 가능합니다.");
+		RequestDispatcher rd = request.getRequestDispatcher("/member/login.jsp");
+		rd.forward(request, response);
+	}
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -31,7 +38,7 @@
 	</header>
 	<h2>회원가입</h2>
 	<hr>
-	<form action="mregAction.jsp" method="POST">
+	<form action="/memReg.do" method="POST">
 		<label for="id">아이디(이메일)</label>
 		<input type="text" name="id" id="id" /><br>
 		<label for="password">비밀번호</label>

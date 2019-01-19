@@ -12,7 +12,7 @@
 <body>
 	<script>
 		alert("로그아웃 되었습니다.");
-		<%response.sendRedirect("home.jsp");%>
+		location.href = '/home.jsp';
 	</script>
 </body>
 </html>

@@ -1,63 +1,48 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%
-	    if(session.getAttribute("login")==null){
-			request.setAttribute("msg", "로그인 후 사용 가능합니다.");
-			RequestDispatcher rd = request.getRequestDispatcher("login.jsp");
-			rd.forward(request, response);
-		}
-    %>
-    <%String msg = (String)request.getAttribute("msg"); %>
+<%
+	String msg = (String)request.getAttribute("msg");
+	int no = Integer.parseInt(request.getParameter("empno"));
+%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
-    label{
-        width: 100px;
-        display: inline-block;
-    }
-    input[type=submit]{
-        width: 280px;
-        margin: auto;
-        color: white;
-        background-color: black;
-        border: 0px;
-        padding: 10px 0;
-    }
-    
-    select{
-    	width:173px;
-    }
-    
-    input[type=date]{
-    	width: 167px;
-    }
-    
-    form>*{
-    	margin-bottom: 10px;
-    }
-    
-    #wrap{
-    	width: 300px;
-    	margin: auto;
-    }
-    h1{
-    	text-align: center;
-    }
+
+	label{
+		width: 100px;
+		display: inline-block;
+		margin: 5px;
+	}
+	
+	input, select{
+		width: 150px;
+	}
+	
+	input[type=submit]{
+		display:block;
+		width: 200px;
+	}
+	
+	#wrap{
+		width: 400px;
+		margin: auto;
+	}
+	
 </style>
 </head>
 <body>
 	<header>
 		<jsp:include page="/header/header.jsp"/>
 	</header>
-    <div id="wrap">
-    	<h1>사원 등록 페이지</h1>
+	<div id="wrap">
+    	<h4>사원 정보 수정</h4>
     	<hr>
-        <form action="/registerAction.jsp">
+        <form action="/editEmp.do" method="post">
             <label for="empno">사원번호</label>
-            <input type="number" name="empno" id="empno"><br>
+            <input type="number" name="empno" id="empno" value="<%=no %>" readonly><br>
             <label for="ename">사원이름</label>
             <input type="text" name="ename" id="ename"><br>
             <label for="job">직급</label>
@@ -85,8 +70,8 @@
         </form>
     </div>
     <script>
-    	<%if(msg!=null){%>
-    	alert("<%=msg%>");
+    	<% if (msg!=null){%>
+    		alert("<%=msg %>");
     	<%}%>
     </script>
 </body>

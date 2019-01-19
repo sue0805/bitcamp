@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>로그인</title>
 <style>
 	label{
 		width: 150px;
@@ -36,11 +36,11 @@
 	<section>
 		<h2>회원 로그인</h2>
 		<hr>
-		<form action="loginAction.jsp" method="POST">
+		<form action="/login.do" method="POST">
 			<label for="id">아이디(이메일)</label>
-			<input type="text" name="id" id="id" /><br>
+			<input type="text" name="id" id="id" required/><br>
 			<label for="password">비밀번호</label>
-			<input type="password" name="password" id="password" /><br>
+			<input type="password" name="password" id="password" required/><br>
 			<input type="submit" value="로그인" />
 		</form>
 	</section>

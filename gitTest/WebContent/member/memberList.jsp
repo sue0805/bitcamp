@@ -1,26 +1,19 @@
-<%@page import="user.User"%>
-<%@page import="java.util.List"%>
-<%@page import="java.util.ArrayList"%>
-<%@page import="user.UserDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%	
 	if(session.getAttribute("login")==null){
 		request.setAttribute("msg", "로그인 후 사용 가능합니다.");
-		RequestDispatcher rd = request.getRequestDispatcher("login.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("/member/login.jsp");
 		rd.forward(request, response);
 	}
-
-	UserDAO dao = new UserDAO();  
-	List<User> list = dao.getUserList();
-	request.setAttribute("user", list);
 %>
     
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>회원 리스트</title>
 <style>
 	table{
 		margin: 30px auto;
@@ -50,18 +43,29 @@
 				<th>회원가입일</th>
 				<th>관리</th>
 			</tr>
-		<%for(int i = 0; i < list.size(); i++){ %>
-			<tr>
-				<td><%=list.get(i).getIdx() %></td>
-				<td><%=list.get(i).getId() %></td>
-				<td><%=list.get(i).getPassword() %></td>
-				<td><%=list.get(i).getPhoto() %></td>
-				<td><%=list.get(i).getName() %></td>
-				<td><%=list.get(i).getRegDate().toString() %></td>
-				<td><a href="#" class="modify" onclick="modify(<%=i%>)">수정</a> <a href="#" class="remove" onclick="remove(<%=i%>)">삭제</a></td>
-			</tr>
-		<%} %>
+			<c:forEach items="${user }" var="member" varStatus="stat">
+				<tr>
+					<td>${member.idx }</td>
+					<td>${member.id }</td>
+					<td>${member.password }</td>
+					<td>${member.photo }</td>
+					<td>${member.name }</td>
+					<td>${member.regDate.toString() }</td>
+					<td><a href="#" class="modify" onclick="modify(${stat.index})">수정</a> <a href="#" class="remove" onclick="remove(${stat.index})">삭제</a></td>
+				</tr>
+			</c:forEach>
 		</table>
 	</section>
+	<script>
+	
+		function modify(no){
+			location.href = "/member/editMember.jsp?idx="+no;
+		}
+		
+		function remove(no){
+			location.href = "/member/delMember.do?idx="+no;
+		}
+		
+	</script>
 </body>
 </html>

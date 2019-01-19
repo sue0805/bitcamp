@@ -25,7 +25,7 @@
 		width: 350px;
 		height: 350px;
 		border-radius: 175px;
-		background-image: url("https://hellobf.co.kr/wp-content/uploads/2016/02/smile-puppy-01.jpg");
+		background-image: url("/img/koong2.jpg");
 		background-size: cover;
 		overflow: hidden;
 		background-position: -60px;

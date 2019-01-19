@@ -8,28 +8,17 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import jdbc.JdbcUtil;
+
 public class UserDAO {
 	private Connection conn;
 	private PreparedStatement pstmt;
 	private ResultSet rs;
-	
-	public UserDAO() {
-		String URL = "jdbc:oracle:thin:@localhost:1521:XE";
-		String USER = "student";
-		String PWD = "1234";
-		
-		try {
-			Class.forName("oracle.jdbc.OracleDriver");
-			conn = DriverManager.getConnection(URL, USER, PWD);
-		} catch (ClassNotFoundException | SQLException e) {
-			e.printStackTrace();
-		}
-	}
-	
-	public int signUp(User u) {
+
+	public int signUp(Connection conn, User u) {
 		int result = -1;
 		
-		String query = "INSERT INTO USER_INFO VALUES(?,?,?,?,seq_user_info.nextval)";
+		String query = "INSERT INTO USER_INFO VALUES(?,?,?,?,seq_user_info.nextval, sysdate)";
 		
 		try {
 			pstmt = conn.prepareStatement(query);
@@ -42,12 +31,14 @@ public class UserDAO {
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			JdbcUtil.close(conn);
 		}
 		
 		return result;
 	}
 	
-	public List<User> getUserList(){
+	public List<User> getUserList(Connection conn){
 		List<User> list = new ArrayList<>();
 		
 		String query = "SELECT * FROM USER_INFO";
@@ -62,11 +53,13 @@ public class UserDAO {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			JdbcUtil.close(conn);
 		}
 		return list;
 	}
 	
-	public User userInfo(String id) {
+	public User userInfo(Connection conn, String id) {
 		User u = null;
 		
 		String query = "SELECT * FROM USER_INFO WHERE ID=?";
@@ -82,11 +75,13 @@ public class UserDAO {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			JdbcUtil.close(conn);
 		}
 		return u;
 	}
 	
-	public int login(String id, String password) {
+	public int login(Connection conn, String id, String password) {
 		int result = -1;
 		
 		String query = "SELECT PASSWORD FROM USER_INFO WHERE ID=?";
@@ -104,6 +99,8 @@ public class UserDAO {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			JdbcUtil.close(conn);
 		}
 		
 		return result;

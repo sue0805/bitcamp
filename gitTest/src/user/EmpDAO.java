@@ -9,25 +9,13 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import jdbc.JdbcUtil;
+
 public class EmpDAO {
-	private Connection conn = null;
 	private PreparedStatement pstmt = null;
 	private ResultSet rs;
 	
-	public EmpDAO() {
-		String URL = "jdbc:oracle:thin:@localhost:1521:XE";
-		String USER = "student";
-		String PWD = "1234";
-		
-		try {
-			Class.forName("oracle.jdbc.OracleDriver");
-			conn = DriverManager.getConnection(URL, USER, PWD);
-		} catch (ClassNotFoundException | SQLException e) {
-			e.printStackTrace();
-		}
-	}
-	
-	public List<Emp> selectEmp(){
+	public List<Emp> selectEmp(Connection conn){
 		List<Emp> list = new ArrayList<>();
 		
 		String query = "SELECT * FROM EMP";
@@ -44,12 +32,14 @@ public class EmpDAO {
 			}
 		} catch (SQLException ex) {
 			ex.printStackTrace();
+		} finally {
+			JdbcUtil.close(conn);
 		}
 		
 		return list;
 	}
 	
-	public int insertEmp(Emp e) {
+	public int insertEmp(Connection conn, Emp e) {
 		int result = -1;
 		
 		String query = "INSERT INTO EMP VALUES(?,?,?,?,?,?,?,?)";
@@ -67,12 +57,14 @@ public class EmpDAO {
 			result = pstmt.executeUpdate();
 		} catch (SQLException ex) {
 			ex.printStackTrace();
+		} finally {
+			JdbcUtil.close(conn);
 		}
 		
 		return result;
 	}
 	
-	public int updateEmp(Emp e, int empno) {
+	public int updateEmp(Connection conn, Emp e, int empno) {
 		int result = -1;
 		String query = "UPDATE EMP SET EMPNO=?, ENAME=?, JOB=?, MGR=?, HIREDATE=?, SAL=?, COMM=?, DEPTNO=? WHERE EMPNO=?";
 		
@@ -87,16 +79,17 @@ public class EmpDAO {
 			pstmt.setInt(7, Integer.parseInt(e.getComm()));
 			pstmt.setInt(8, Integer.parseInt(e.getDeptno()));
 			
-			pstmt.setInt(9, empno);
+			pstmt.setInt(9, Integer.parseInt(e.getEmpno()));
 			result = pstmt.executeUpdate();
 		} catch (SQLException ex) {
 			ex.printStackTrace();
+		} finally {
+			JdbcUtil.close(conn);
 		}
-		System.out.println(result);
 		return result;
 	}
 	
-	public int deleteEmp(String empno) {
+	public int deleteEmp(Connection conn, String empno) {
 		int result = -1;
 		
 		String query = "DELETE FROM EMP WHERE EMPNO=?";
@@ -108,6 +101,8 @@ public class EmpDAO {
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			JdbcUtil.close(conn);
 		}
 		
 		return result;

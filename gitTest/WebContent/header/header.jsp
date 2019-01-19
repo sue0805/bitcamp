@@ -5,7 +5,7 @@
 	User u = (User)session.getAttribute("login");
 	boolean loginStatus = u == null? false : true;
 	String menuL = loginStatus ? "로그아웃" : "로그인";
-	String menuH = loginStatus ? "logout.jsp" : "login.jsp";
+	String menuH = loginStatus ? "/member/logout.jsp" : "/member/login.jsp";
 %>
 <!DOCTYPE html>
 <html>
@@ -28,7 +28,7 @@
 	li{
 		display: inline-block;
 		padding: 20px 0px;
-		width: 16%;
+		width: 13.5%;
 		text-align: center;
 		margin: 0;
 	}
@@ -44,15 +44,16 @@
 </style>
 </head>
 <body>
-	<h1><a href="home.jsp">Open Project</a></h1>
+	<h1><a href="/home.jsp">Open Project</a></h1>
 	<nav>
 		<ul>
-			<li><a href="memberRegister.jsp">회원가입</a></li>
+			<li><a href="/member/memberRegister.jsp">회원가입</a></li>
 			<li><a href="<%=menuH%>"><%=menuL%></a></li>
-			<li><a href="mypage.jsp">회원마이페이지(회원)</a></li>
-			<li><a href="memberList.jsp">회원리스트(회원)</a></li>
-			<li><a href="empList.jsp">사원리스트</a></li>
-			<li><a href="EmpRegister.jsp">사원등록</a></li>
+			<li><a href="/member/mypage.jsp">회원마이페이지(회원)</a></li>
+			<li><a href="/memberList.do">회원리스트(회원)</a></li>
+			<li><a href="/empList.do">사원리스트</a></li>
+			<li><a href="/emp/EmpRegister.jsp">사원등록</a></li>
+			<li><a href="/guestbookList.do">방명록</a></li>
 		</ul>
 	</nav>
 </body>

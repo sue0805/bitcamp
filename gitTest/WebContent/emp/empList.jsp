@@ -1,20 +1,12 @@
-<%@page import="java.util.List"%>
-<%@page import="user.Emp"%>
-<%@page import="user.EmpDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     <%
 	    if(session.getAttribute("login")==null){
 			request.setAttribute("msg", "로그인 후 사용 가능합니다.");
-			RequestDispatcher rd = request.getRequestDispatcher("login.jsp");
+			RequestDispatcher rd = request.getRequestDispatcher("/member/login.jsp");
 			rd.forward(request, response);
 		}
-    
-	    EmpDAO dao = new EmpDAO();
-	    List<Emp> list = dao.selectEmp();
-	    
-	    pageContext.setAttribute("list", list);
     %>
 <!DOCTYPE html>
 <html>
@@ -70,17 +62,22 @@
 	</section>
 	<script>
 		function modify(no){
-			var popUrl = 'editEmp.jsp?empno='+no;
-			var popOption = 'width=370, height=400, resizable=no, scrollbars=no, status=no'
-			window.open(popUrl, "", popOption);
+			location.href = '/emp/editEmp.jsp?empno='+no;
 		}
 		
 		function remove(no){
 			var del = confirm('삭제하시겠습니까?');
 			if(del == true){
-				location.href = 'removeEmpAction.jsp?empno='+no;
+				location.href = '/delEmp.do?empno='+no;
 			}
 		}
+		
+		<%
+			String msg = (String)request.getAttribute("msg");
+			if(msg != null){
+		%>
+			alert('${msg}');
+		<%} %>
 	</script>
 </body>
 </html>
