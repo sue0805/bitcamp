@@ -38,10 +38,50 @@ public class UserDAO {
 		return result;
 	}
 	
+	public int removeUser(Connection conn, int idx) {
+		int result = -1;
+		
+		String query = "delete from user_info where idx=?";
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, idx);
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return result;
+	}
+	
+	public int updateUser(Connection conn, User u) {
+		int result = -1;
+		
+		String query = "update user_info set id=?, password=?, name=?, photo=? where idx=?";
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, u.getId());
+			pstmt.setString(2, u.getPassword());
+			pstmt.setString(3, u.getName());
+			pstmt.setString(4, u.getPhoto());
+			pstmt.setInt(5, u.getIdx());
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JdbcUtil.close(conn);
+		}
+		return result;
+	}
+	
 	public List<User> getUserList(Connection conn){
 		List<User> list = new ArrayList<>();
 		
-		String query = "SELECT * FROM USER_INFO";
+		String query = "SELECT * FROM USER_INFO order by idx asc";
 		
 		try {
 			pstmt = conn.prepareStatement(query);

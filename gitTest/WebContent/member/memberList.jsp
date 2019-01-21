@@ -25,6 +25,10 @@
 		padding: 5px;
 		text-align: center;
 	}
+	img{
+		width: 50px;
+		height: 50px;
+	}
 </style>
 </head>
 <body>
@@ -48,10 +52,10 @@
 					<td>${member.idx }</td>
 					<td>${member.id }</td>
 					<td>${member.password }</td>
-					<td>${member.photo }</td>
+					<td><img src="${member.photo }" alt="member_photo"></td>
 					<td>${member.name }</td>
 					<td>${member.regDate.toString() }</td>
-					<td><a href="#" class="modify" onclick="modify(${stat.index})">수정</a> <a href="#" class="remove" onclick="remove(${stat.index})">삭제</a></td>
+					<td><a href="#" class="modify" onclick="modify(${member.idx})">수정</a> <a href="#" class="remove" onclick="remove(${member.idx})">삭제</a></td>
 				</tr>
 			</c:forEach>
 		</table>
@@ -63,9 +67,17 @@
 		}
 		
 		function remove(no){
-			location.href = "/member/delMember.do?idx="+no;
+			var del = confirm("삭제하시겠습니까?");
+			if(del){
+				location.href = "/delMember.do?idx="+no;
+			}
 		}
 		
+		<% String msg = (String)request.getAttribute("msg");
+			if(msg != null){
+		%>
+		alert("${msg}");
+		<%}%>
 	</script>
 </body>
 </html>

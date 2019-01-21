@@ -68,9 +68,6 @@ public class Controller extends HttpServlet {
 
     private void process(HttpServletRequest request,
     HttpServletResponse response) throws ServletException, IOException {
-    	
-    	request.setCharacterEncoding("utf-8");
-		response.setContentType("text/html; charset=UTF-8");
 		
 		String command = request.getRequestURI();
 		if (command.indexOf(request.getContextPath()) == 0) {

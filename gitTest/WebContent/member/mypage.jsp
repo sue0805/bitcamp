@@ -25,10 +25,9 @@
 		width: 350px;
 		height: 350px;
 		border-radius: 175px;
-		background-image: url("/img/koong2.jpg");
-		background-size: cover;
+		background-image: url("${login.photo}");
+		background-size: contain;
 		overflow: hidden;
-		background-position: -60px;
 	}
 </style>
 </head>

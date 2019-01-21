@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" id="WebApp_ID" version="3.1">
-  <display-name>web190118</display-name>
+  <display-name>Works</display-name>
   <welcome-file-list>
     <welcome-file>index.html</welcome-file>
     <welcome-file>index.htm</welcome-file>
@@ -18,12 +18,29 @@
     </init-param>
   </servlet>
   <servlet>
-  	<servlet-name>DBCPInit</servlet-name>
-  	<servlet-class>jdbc.DBCPInit</servlet-class>
-  	<load-on-startup>1</load-on-startup>
+    <servlet-name>DBCPInit</servlet-name>
+    <servlet-class>jdbc.DBCPInit</servlet-class>
+    <load-on-startup>1</load-on-startup>
   </servlet>
   <servlet-mapping>
     <servlet-name>ControllerUsingFile</servlet-name>
     <url-pattern>*.do</url-pattern>
   </servlet-mapping>
+  <filter>
+    <filter-name>LoginCheck</filter-name>
+    <filter-class>filter.LoginCheckFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>LoginCheck</filter-name>
+    <url-pattern>/guestbook/*</url-pattern>
+    <url-pattern>/emp/*</url-pattern>
+  </filter-mapping>
+  <filter>
+  	<filter-name>CharacterEncoding</filter-name>
+  	<filter-class>filter.CharacterEncodingFilter</filter-class>
+  </filter>
+  <filter-mapping>
+  	<filter-name>CharacterEncoding</filter-name>
+  	<url-pattern>/member/*</url-pattern>
+  </filter-mapping>
 </web-app>

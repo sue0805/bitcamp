@@ -12,7 +12,7 @@
 	</header>
 	<h2>회원가입</h2>
 	<hr>
-	<form action="/editMember.do" method="POST">
+	<form action="/editMember.do" method="POST" enctype="multipart/form-data">
 		<input type="hidden" name="idx" value='<%=request.getParameter("idx")%>'/>
 		<label for="id">아이디(이메일)</label>
 		<input type="text" name="id" id="id" /><br>
