@@ -1,0 +1,91 @@
+@charset "UTF-8";
+
+h1 a{
+	text-decoration: none;
+	color: black;
+}
+ul{
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+	border-top: 1px solid black;
+	border-bottom: 1px solid black;
+}
+
+li{
+	display: inline-block;
+	padding: 20px 0px;
+	width: 13.5%;
+	text-align: center;
+	margin: 0;
+}
+ul a {
+	text-decoration: none;
+	color: black;
+	font-weight: bolder;
+}
+
+ul a:hover{
+	color: red;
+}
+label{
+	width: 150px;
+	display: inline-block;
+	margin: 10px 0px;
+}
+
+input{
+	padding: 5px 0;
+}
+
+form{
+	width: 450px;
+	margin: auto;
+}
+
+input[type=submit]{
+	width: 80px;
+	margin-left: 155px;
+	display: block;
+	margin-top: 20px;
+}
+
+.rlabel{
+	width: 150px;
+	display: inline-block;
+	margin: 5px 0px;
+}
+
+.rform{
+	margin: auto;
+	width: 450px;
+}
+
+.rsubmit{
+	width: 100px;
+	margin: 10px auto;
+	display: block;
+}
+
+p span{
+	width: 100px;
+	display: inline-block;
+}
+#wrap{
+	width: 400px;
+	margin: auto;
+}
+table{
+	margin: 30px auto;
+	width: 1000px;
+	border: 1px solid black;
+}
+th, td{
+	border: 1px solid black;
+	padding: 5px;
+	text-align: center;
+}
+img{
+	width: 50px;
+	height: 50px;
+}

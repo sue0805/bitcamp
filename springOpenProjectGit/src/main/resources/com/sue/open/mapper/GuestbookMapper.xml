@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sue.open.mapper.GuestbookMapper">
+
+	<insert id="insertContent" parameterType="com.sue.open.guestbook.Guestbook">
+		insert into guestbook(gname, gpassword, gcontent) values(#{gname}, #{gpassword}, #{gcontent})
+	</insert>
+	
+	<select id="readContent" resultType="com.sue.open.guestbook.Guestbook">
+		select * from guestbook where no=#{no}
+	</select>
+	
+	<select id="getList" resultType="com.sue.open.guestbook.Guestbook">
+		select * from guestbook order by no desc
+	</select>
+	
+	<select id="getListWithPaging" resultType="com.sue.open.guestbook.Guestbook">
+		select * from guestbook order by no desc limit #{startNum}, #{amount}
+	</select>
+	
+	<select id="countList" resultType="Integer">
+		select count(*) from guestbook;
+	</select>
+</mapper>
