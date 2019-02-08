@@ -67,7 +67,7 @@ public class HomeController {
 	public String signup(Model model, MultipartFile[] photo, @RequestParam("id") String id
 			, @RequestParam("password") String password, @RequestParam("name") String name, HttpServletRequest request) {
 		String view = "";
-		String uploadFolder = "/upload";
+		String uploadFolder = "/resources/upload";
 		String dir = request.getSession().getServletContext().getRealPath(uploadFolder);
 		
 		Member member = new Member();
@@ -96,7 +96,7 @@ public class HomeController {
 	
 	@RequestMapping("/upload")
 	public String upload(HttpServletRequest request) {
-		String uploadURI = "/upload";
+		String uploadURI = "/resources/upload";
 		String dir = request.getSession().getServletContext().getRealPath(uploadURI);
 		System.out.println(dir);
 		

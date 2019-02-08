@@ -27,12 +27,12 @@
 	
 	<beans:bean id="multipartResolver" class="org.springframework.web.multipart.support.StandardServletMultipartResolver" />
 	
-<!-- 	<interceptors>
+ 	<interceptors>
 		<interceptor>
 			<mapping path="/member/**"/>
 			<mapping path="/guestbook/**"/>
 			<beans:bean class="com.sue.open.interceptor.LoginCheckInterceptor"/>
 		</interceptor>
-	</interceptors> -->
+	</interceptors>
 	
 </beans:beans>
