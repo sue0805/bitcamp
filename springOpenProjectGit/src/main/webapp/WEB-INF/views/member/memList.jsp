@@ -99,7 +99,7 @@
 					var id = $('<td>' + list[i].id + '</td>');
 					var pwd = $('<td>' + list[i].password + '</td>');
 					var name = $('<td>' + list[i].name + '</td>');
-					var photo = $('<td>' + list[i].photo + '</td>');
+					var photo = $('<td><img src="/open/resources/upload/' + list[i].photo + '" alt="member_photo"></td>');
 					var regDate = $('<td>' + list[i].regDate + '</td>');
 					var manage = $('<td><a href="#" class="modify" onclick="modify(' + list[i].idx + ')">수정</a> <a href="#" class="remove" onclick="remove(' + list[i].idx + ')">삭제</a></td>');
 					tr.append(idx).append(id).append(pwd).append(photo).append(name).append(regDate).append(manage);

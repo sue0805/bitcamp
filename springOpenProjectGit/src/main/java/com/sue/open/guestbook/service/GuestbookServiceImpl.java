@@ -54,4 +54,26 @@ public class GuestbookServiceImpl implements GuestbookService{
 		return list;
 	}
 
+	@Override
+	public boolean delete(int no) {
+		boolean result = true;
+		
+		try {
+			mapper.delete(no);
+		} catch (Exception e) {
+			result = false;
+			e.printStackTrace();
+		}
+		
+		return result;
+	}
+
+	@Override
+	public boolean checkPW(int no, String gpassword) {
+		
+		String pw = mapper.getPW(no);
+		
+		return gpassword.equals(pw);
+	}
+
 }

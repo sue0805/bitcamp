@@ -20,6 +20,14 @@
 	</select>
 	
 	<select id="countList" resultType="Integer">
-		select count(*) from guestbook;
+		select count(*) from guestbook
+	</select>
+	
+	<delete id="delete">
+		delete from guestbook where no = #{no}
+	</delete>
+	
+	<select id="getPW" resultType="string">
+		select gpassword from guestbook where no = #{no};
 	</select>
 </mapper>

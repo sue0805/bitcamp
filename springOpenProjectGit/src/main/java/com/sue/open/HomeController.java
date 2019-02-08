@@ -65,9 +65,10 @@ public class HomeController {
 	
 	@RequestMapping(value="/signup", method=RequestMethod.POST)
 	public String signup(Model model, MultipartFile[] photo, @RequestParam("id") String id
-			, @RequestParam("password") String password, @RequestParam("name") String name) {
+			, @RequestParam("password") String password, @RequestParam("name") String name, HttpServletRequest request) {
 		String view = "";
-		String uploadFolder = "C:\\Users\\1027\\git\\springOP\\springOpenProjectGit\\src\\main\\webapp\\resources\\upload";
+		String uploadFolder = "/upload";
+		String dir = request.getSession().getServletContext().getRealPath(uploadFolder);
 		
 		Member member = new Member();
 		member.setId(id);
@@ -81,7 +82,7 @@ public class HomeController {
 		if(!result) model.addAttribute("msg", "회원가입 실패");
 		else {
 			member = service.selectById(id);
-			File saveFile = new File(uploadFolder, photo[0].getOriginalFilename());
+			File saveFile = new File(dir, photo[0].getOriginalFilename());
 			
 			try {
 				photo[0].transferTo(saveFile);
@@ -91,5 +92,14 @@ public class HomeController {
 		}
 		
 		return view;
+	}
+	
+	@RequestMapping("/upload")
+	public String upload(HttpServletRequest request) {
+		String uploadURI = "/upload";
+		String dir = request.getSession().getServletContext().getRealPath(uploadURI);
+		System.out.println(dir);
+		
+		return "home";
 	}
 }

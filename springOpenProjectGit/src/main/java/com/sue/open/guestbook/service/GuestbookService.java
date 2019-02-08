@@ -11,4 +11,6 @@ public interface GuestbookService {
 	public List<Guestbook> getList();
 	public List<Guestbook> getList(Criteria cri);
 	public int countList();
+	public boolean delete(int no);
+	public boolean checkPW(int no, String gpassword);
 }

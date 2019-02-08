@@ -22,7 +22,7 @@
 				<td>메시지 번호 : ${msg.no }<br>
 				이름 : ${msg.gname }<br>
 				내용 : ${msg.gcontent }<br>
-				<a href="/guestbook/confirmDeletion.jsp?message_id=${msg.no}">[삭제하기]</a></td>
+				<a href="delete?no=${msg.no}">[삭제하기]</a></td>
 			</tr>
 		</c:forEach>
 		</table>

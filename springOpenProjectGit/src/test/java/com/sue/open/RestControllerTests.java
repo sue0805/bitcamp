@@ -41,17 +41,17 @@ public class RestControllerTests {
 	public void setup() {
 		this.mockMvc = MockMvcBuilders.webAppContextSetup(ctx).build();
 	}
-	
-	@Test
-	public void testConvert() throws Exception{
+//	
+//	@Test
+//	public void testConvert() throws Exception{
+//
+//		Member m = service.selectById("hey");
+//		
+//		String jsonStr = new Gson().toJson(m);
+//		
+//		log.info(jsonStr);
+//		
+//		mockMvc.perform(post("/member/test").contentType(MediaType.APPLICATION_JSON).content(jsonStr)).andExpect(status().is(200));
+//	}
 
-		Member m = service.selectById("hey");
-		
-		String jsonStr = new Gson().toJson(m);
-		
-		log.info(jsonStr);
-		
-		mockMvc.perform(post("/member/test").contentType(MediaType.APPLICATION_JSON).content(jsonStr)).andExpect(status().is(200));
-	}
-	
 }
