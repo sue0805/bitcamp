@@ -12,5 +12,5 @@ public interface GuestbookMapper {
 	public List<Guestbook> getList();
 	public List<Guestbook> getListWithPaging(Criteria cri);
 	public int countList();
-
+	public void deleteContent(int no);
 }

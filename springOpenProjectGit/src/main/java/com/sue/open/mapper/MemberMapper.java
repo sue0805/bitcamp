@@ -10,4 +10,8 @@ public interface MemberMapper {
 	public void insertMember(Member member);
 	
 	public List<Member> getList();
+	
+	public int delete(int idx);
+	
+	public int update(Member member);
 }

@@ -8,6 +8,7 @@ import com.sue.open.guestbook.Guestbook;
 public interface GuestbookService {
 	public boolean insertContent(Guestbook guestbook);
 	public Guestbook readContent(int no);
+	public List<Guestbook> getList();
 	public List<Guestbook> getList(Criteria cri);
 	public int countList();
 }

@@ -5,8 +5,10 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.sue.open.guestbook.Criteria;
+import com.sue.open.guestbook.Guestbook;
 import com.sue.open.guestbook.service.GuestbookService;
 import com.sue.open.mapper.GuestbookMapper;
 
@@ -49,18 +51,18 @@ public class GuestbookMapperTests {
 //		mapper.getList().forEach(book -> log.info(book));
 //	}
 //	
-//	@Test
-//	public void mapperTest04() {
-//		Guestbook gb = new Guestbook();
-//		gb.setGname(names[(int)(Math.random()*10)]); 
-//		gb.setGpassword("1234");
-//		gb.setGcontent("Insert Test................");
-//		
-//		System.out.println(service.insertContent(gb));
-//		
-//		System.out.println(service.getList());
-//		
-//	}
+	@Test
+	public void mapperTest04() {
+		Guestbook gb = new Guestbook();
+		gb.setGname(names[(int)(Math.random()*10)]); 
+		gb.setGpassword("1234");
+		gb.setGcontent("Insert Test................");
+		
+		System.out.println(service.insertContent(gb));
+		
+		System.out.println(service.getList());
+		
+	}
 	
 	@Test
 	public void mapperTest05() {
@@ -69,5 +71,7 @@ public class GuestbookMapperTests {
 		cri.setAmount(3);
 		cri.setStartNum((cri.getPageNum()-1)*cri.getAmount());
 		service.getList(cri).forEach(book -> log.info(book));
+		
+		ModelAndView mv = new ModelAndView();
 	}
 }

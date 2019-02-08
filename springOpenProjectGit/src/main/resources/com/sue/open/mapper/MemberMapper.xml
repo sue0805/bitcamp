@@ -14,4 +14,12 @@
 	<select id="getList" resultType="com.sue.open.member.Member">
 	select * from member
 	</select>
+	
+	<delete id="delete">
+	delete from member where idx = #{idx}
+	</delete>
+	
+	<update id="update">
+	update member set id=#{id}, password=#{password}, name=#{name} where idx=#{idx}
+	</update>
 </mapper>

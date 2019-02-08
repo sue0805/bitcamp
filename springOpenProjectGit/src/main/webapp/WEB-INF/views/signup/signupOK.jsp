@@ -11,6 +11,6 @@
 		<jsp:include page="/WEB-INF/views/header/header.jsp"/>
 	</header>
 	<h2>회원 가입 성공</h2>
-	<a href="login/login">로그인 하기</a>
+	<a href="/open/login">로그인 하기</a>
 </body>
 </html>

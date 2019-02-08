@@ -67,7 +67,7 @@ public class HomeController {
 	public String signup(Model model, MultipartFile[] photo, @RequestParam("id") String id
 			, @RequestParam("password") String password, @RequestParam("name") String name) {
 		String view = "";
-		String uploadFolder = "C:\\Users\\1027\\Documents\\workspace-sts-3.9.7.RELEASE\\springOpenProject\\src\\main\\webapp\\resources\\upload";
+		String uploadFolder = "C:\\Users\\1027\\git\\springOP\\springOpenProjectGit\\src\\main\\webapp\\resources\\upload";
 		
 		Member member = new Member();
 		member.setId(id);

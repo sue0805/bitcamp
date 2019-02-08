@@ -30,10 +30,7 @@
 	<bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">
 		<constructor-arg index="0" ref="sqlSessionFactory"/>
 	</bean>
-	
-	<bean id="memberDAO" class="com.sue.open.member.dao.MemberDAO"/>
-	<bean id="guestbookDAO" class="com.sue.open.guestbook.dao.GuestbookDAO"/>
-	
+		
 	<mybatis-spring:scan base-package="com.sue.open.mapper"/>
 	
 	<context:component-scan base-package="com.sue.open"/>

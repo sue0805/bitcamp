@@ -1,49 +1,80 @@
 package com.sue.open.member.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.sue.open.mapper.MemberMapper;
 import com.sue.open.member.Member;
-import com.sue.open.member.dao.MemberDAO;
 
 @Service
 public class MemberServiceImpl implements MemberService {
 
 	@Autowired
-	private MemberDAO dao;
+	private MemberMapper mapper;
 	
-	@Override
 	public boolean login(String id, String password) {
-		return dao.login(id, password);
+		String pw = "";
+		
+		Member member = mapper.selectById(id);
+		
+		if(member != null) pw = member.getPassword();
+		
+		return pw.equals(password); 
 	}
-
-	@Override
+	
+	public Member selectById(String id) {
+		Member member = mapper.selectById(id);
+		
+		return member;
+	}
+	
 	public boolean signup(Member member) {
-		return dao.signup(member);
+		
+		try {
+			mapper.insertMember(member);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+		
+		return true;
 	}
-
-	@Override
+	
 	public List<Member> getList() {
-		return dao.getList();
+		List<Member> list = new ArrayList<>();
+		mapper.getList().forEach(member -> list.add(member));
+		
+		return list;
 	}
 
 	@Override
 	public boolean delete(int idx) {
-		// TODO Auto-generated method stub
-		return false;
+		boolean result = true;
+		
+		try {
+			mapper.delete(idx);
+		} catch(Exception e) {
+			result = false;
+			e.printStackTrace();
+		}
+		return result;
 	}
 
 	@Override
 	public boolean modify(Member member) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public Member selectById(String id) {
-		return dao.selectById(id);
+		
+		boolean result = true;
+		
+		try {
+			mapper.update(member);
+		} catch(Exception e) {
+			result = false;
+			e.printStackTrace();
+		}
+		return result;
 	}
 
 }

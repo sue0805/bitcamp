@@ -15,6 +15,6 @@ public class Member {
 	private String password;
 	private String name;
 	private String photo;
-	private Date regDate;
+	private String regDate;
 	
 }
