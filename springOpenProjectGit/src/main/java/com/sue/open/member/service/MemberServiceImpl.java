@@ -52,29 +52,24 @@ public class MemberServiceImpl implements MemberService {
 
 	@Override
 	public boolean delete(int idx) {
-		boolean result = true;
+		boolean result;
+				
+		result = mapper.delete(idx) == 1 ? true : false;
 		
-		try {
-			mapper.delete(idx);
-		} catch(Exception e) {
-			result = false;
-			e.printStackTrace();
-		}
 		return result;
 	}
 
 	@Override
 	public boolean modify(Member member) {
 		
-		boolean result = true;
+		int rowCnt = 0;
 		
 		try {
-			mapper.update(member);
+			rowCnt = mapper.update(member);
 		} catch(Exception e) {
-			result = false;
 			e.printStackTrace();
 		}
-		return result;
+		return rowCnt == 1 ? true : false;
 	}
 
 }

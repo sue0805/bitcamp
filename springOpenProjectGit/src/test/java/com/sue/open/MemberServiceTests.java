@@ -33,11 +33,17 @@ public class MemberServiceTests {
 	
 	@Test
 	public void updateTest() {
-		Member m = service.selectById("hey");
-		log.info(m);
-		m.setName("헤이헤이");
-		mapper.update(m);
-		m = service.selectById("hey");
-		log.info(m);
+		Member m = service.selectById("nnnnn");
+//		log.info(m);
+//		m.setName("hey");
+		boolean result = service.modify(m);
+		m = service.selectById("nnnn");
+		log.info(result + " : " + m);
 	}
+	
+//	@Test
+//	public void deleteTest() {
+//		boolean result = service.delete(1000);
+//		log.info(result);
+//	}
 }
