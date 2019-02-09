@@ -34,17 +34,14 @@ public class GuestbookController {
 	
 	@RequestMapping(value="/write", method=RequestMethod.POST)
 	public String write(Model model, Guestbook guestbook, Criteria cri) {
-		String view = "";
 		boolean result = service.insertContent(guestbook);
 		
 		if(!result) {
 			model.addAttribute("msg", "작성 실패");
-			view = "/guestbook/write";
+			return "/guestbook/write";
 		} else {
-			view = "/guestbook/list";
+			return list(cri, model);
 		}
-		
-		return list(cri, model);
 	}
 	
 	@RequestMapping(value="/delete", method=RequestMethod.GET)
