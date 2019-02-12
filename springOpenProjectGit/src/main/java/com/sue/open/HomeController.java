@@ -74,6 +74,7 @@ public class HomeController {
 		member.setId(id);
 		member.setPassword(password);
 		member.setName(name);
+		member.setAuthCode((int)(Math.random()*100000) + "m" + id.substring(0, 3));
 		member.setPhoto(photo[0].getOriginalFilename());
 		
 		boolean result = service.signup(member);
@@ -102,4 +103,5 @@ public class HomeController {
 		
 		return "home";
 	}
+
 }

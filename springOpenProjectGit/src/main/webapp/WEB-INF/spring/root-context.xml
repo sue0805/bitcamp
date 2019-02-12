@@ -30,13 +30,30 @@
 	<bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">
 		<constructor-arg index="0" ref="sqlSessionFactory"/>
 	</bean>
-		
+	
+	<!-- mail -->
+ 	<bean id="mailSender"
+		class="org.springframework.mail.javamail.JavaMailSenderImpl">
+		<property name="host" value="smtp.gmail.com" />
+		<property name="port" value="587" /><!-- 465 or 25 -->
+		<property name="username" value="sue.kang.05@gmail.com" />
+		<property name="password" value="suetest05" />
+		<property name="defaultEncoding" value="utf-8" />
+		<property name="javaMailProperties">
+			<props>
+				<prop key="mail.transport.protocol">smtp</prop>
+				<prop key="mail.smtp.auth">true</prop>
+				<prop key="mail.smtp.starttls.enable">true</prop>
+				<prop key="mail.debug">true</prop>
+			</props>
+		</property>
+	</bean>
+	
 	<mybatis-spring:scan base-package="com.sue.open.mapper"/>
 	
 	<context:component-scan base-package="com.sue.open"/>
 	<context:component-scan base-package="com.sue.open.mapper"/>
 	<context:component-scan base-package="com.sue.open.member.service"/>
-	<context:component-scan base-package="com.sue.open.member.dao"/>
 	<context:component-scan base-package="com.sue.open.guestbook.service"/>
-	<context:component-scan base-package="com.sue.open.guestbook.dao"/>
+	<context:component-scan base-package="com.sue.open.mail"/>
 </beans>

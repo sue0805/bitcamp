@@ -8,7 +8,7 @@
 	</select>
 	
 	<insert id="insertMember" parameterType="com.sue.open.member.Member">
-	insert into member(id, password, name, photo) values(#{id}, #{password}, #{name}, #{photo})
+	insert into member(id, password, name, photo, authCode) values(#{id}, #{password}, #{name}, #{photo}, #{authCode})
 	</insert>
 	
 	<select id="getList" resultType="com.sue.open.member.Member">
@@ -21,5 +21,9 @@
 	
 	<update id="update">
 	update member set id=#{id}, password=#{password}, name=#{name} where idx=#{idx}
+	</update>
+	
+	<update id="statusOK">
+	update member set status=1 where authCode=#{param1} and id=#{param2}
 	</update>
 </mapper>

@@ -8,5 +8,6 @@
 	<header>
 		<jsp:include page="/WEB-INF/views/header/header.jsp"/>
 	</header>
+	${msg }
 </body>
 </html>

@@ -54,7 +54,7 @@ public class MemberServiceImpl implements MemberService {
 	public boolean delete(int idx) {
 		boolean result;
 				
-		result = mapper.delete(idx) == 1 ? true : false;
+		result = mapper.delete(idx) == 1;
 		
 		return result;
 	}
@@ -69,7 +69,21 @@ public class MemberServiceImpl implements MemberService {
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
-		return rowCnt == 1 ? true : false;
+		return rowCnt == 1;
+	}
+
+	@Override
+	public boolean statusOK(String authCode, String id) {
+		
+		int rowCnt = 0;
+		
+		try {
+			rowCnt = mapper.statusOK(authCode, id);
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+		return rowCnt == 1;
 	}
 
 }

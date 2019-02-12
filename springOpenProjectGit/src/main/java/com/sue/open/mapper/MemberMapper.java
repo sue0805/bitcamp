@@ -14,4 +14,6 @@ public interface MemberMapper {
 	public int delete(int idx);
 	
 	public int update(Member member);
+	
+	public int statusOK(String authCode, String id);
 }

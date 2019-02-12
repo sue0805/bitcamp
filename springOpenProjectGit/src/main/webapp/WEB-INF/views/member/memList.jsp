@@ -40,6 +40,8 @@
 	</header>
 	<section>
 	<h2>회원 리스트</h2>
+	<a href='/open/down.xls'>엑셀로 다운받기</a>
+	<a href='/open/pdown.pdf'>PDF로 다운받기</a>
 		<table>
 		<thead>
 			<tr>

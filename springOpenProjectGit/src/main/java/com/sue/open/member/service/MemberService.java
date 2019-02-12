@@ -11,4 +11,5 @@ public interface MemberService {
 	public List<Member> getList();
 	public boolean delete(int idx);
 	public boolean modify(Member member);
+	public boolean statusOK(String authCode, String id);
 }
