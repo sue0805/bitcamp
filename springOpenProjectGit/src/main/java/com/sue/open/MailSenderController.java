@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.sue.open.mail.MailSendService;
 import com.sue.open.member.Member;
+import com.sue.open.security.Aes256;
 
 @Controller
 @RequestMapping("/mail")
@@ -15,8 +16,11 @@ public class MailSenderController {
 	
 	@Inject
 	private MailSendService mailService;
+	
+	@Inject
+	private Aes256 aes;
 
-	@RequestMapping("/simplemailsend")
+	@RequestMapping("/authmailsend")
 	public String simpleMailSend(HttpServletRequest request) {
 		
 		Member m = (Member)request.getSession().getAttribute("login");
@@ -27,17 +31,5 @@ public class MailSenderController {
 		
 		return "mail/sendmailOK";
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 }

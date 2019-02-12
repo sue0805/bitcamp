@@ -1,13 +1,18 @@
 package com.sue.open.member.service;
 
+import java.io.UnsupportedEncodingException;
+import java.security.GeneralSecurityException;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.inject.Inject;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.sue.open.mapper.MemberMapper;
 import com.sue.open.member.Member;
+import com.sue.open.security.Aes256;
 
 @Service
 public class MemberServiceImpl implements MemberService {
@@ -15,10 +20,23 @@ public class MemberServiceImpl implements MemberService {
 	@Autowired
 	private MemberMapper mapper;
 	
+	@Inject
+	private Aes256 aes;
+	
 	public boolean login(String id, String password) {
 		String pw = "";
 		
-		Member member = mapper.selectById(id);
+		Member member = null;
+		try {
+			member = mapper.selectById(aes.encrypt(id));
+			member.setId(aes.decrypt(member.getId()));
+			member.setPassword(aes.decrypt(member.getPassword()));
+			member.setName(aes.decrypt(member.getName()));
+		} catch (UnsupportedEncodingException | GeneralSecurityException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		
 		if(member != null) pw = member.getPassword();
 		
@@ -27,6 +45,15 @@ public class MemberServiceImpl implements MemberService {
 	
 	public Member selectById(String id) {
 		Member member = mapper.selectById(id);
+		
+		try {
+			member.setId(aes.decrypt(member.getId()));
+			member.setPassword(aes.decrypt(member.getPassword()));
+			member.setName(aes.decrypt(member.getName()));
+		} catch (UnsupportedEncodingException | GeneralSecurityException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		return member;
 	}
@@ -45,7 +72,16 @@ public class MemberServiceImpl implements MemberService {
 	
 	public List<Member> getList() {
 		List<Member> list = new ArrayList<>();
-		mapper.getList().forEach(member -> list.add(member));
+		mapper.getList().forEach(member -> {
+			try {
+				member.setId(aes.decrypt(member.getId()));
+				member.setPassword(aes.decrypt(member.getPassword()));
+				member.setName(aes.decrypt(member.getName()));
+			} catch (UnsupportedEncodingException | GeneralSecurityException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			list.add(member);});
 		
 		return list;
 	}
@@ -78,7 +114,7 @@ public class MemberServiceImpl implements MemberService {
 		int rowCnt = 0;
 		
 		try {
-			rowCnt = mapper.statusOK(authCode, id);
+			rowCnt = mapper.statusOK(authCode, aes.encrypt(id));
 		} catch(Exception e) {
 			e.printStackTrace();
 		}

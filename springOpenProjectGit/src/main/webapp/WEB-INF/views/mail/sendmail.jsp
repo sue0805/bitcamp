@@ -12,7 +12,7 @@
 	</header>
 	<section>
 		<h2>이메일 인증이 필요합니다.</h2>
-		<a href="/open/mail/simplemailsend">인증 메일 받기</a>
+		<a href="/open/mail/authmailsend">인증 메일 받기</a>
 	</section>
 </body>
 </html>

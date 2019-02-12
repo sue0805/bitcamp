@@ -1,6 +1,8 @@
 package com.sue.open;
 
 import java.io.File;
+import java.io.UnsupportedEncodingException;
+import java.security.GeneralSecurityException;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -15,6 +17,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.sue.open.member.Member;
 import com.sue.open.member.service.MemberService;
+import com.sue.open.security.Aes256;
 
 /**
  * Handles requests for the application home page.
@@ -24,6 +27,9 @@ public class HomeController {
 	
 	@Autowired
 	private MemberService service;
+	
+	@Autowired
+	private Aes256 aes;
 	
 	@RequestMapping("/")
 	public String home() {
@@ -45,7 +51,12 @@ public class HomeController {
 		
 		if(!result) model.addAttribute("msg", "로그인 실패");
 		else {
-			session.setAttribute("login", service.selectById(id));
+			try {
+				session.setAttribute("login", service.selectById(aes.encrypt(id)));
+			} catch (UnsupportedEncodingException | GeneralSecurityException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		
 		return view;
@@ -71,9 +82,14 @@ public class HomeController {
 		String dir = request.getSession().getServletContext().getRealPath(uploadFolder);
 		
 		Member member = new Member();
-		member.setId(id);
-		member.setPassword(password);
-		member.setName(name);
+		try {
+			member.setId(aes.encrypt(id));
+			member.setPassword(aes.encrypt(password));
+			member.setName(aes.encrypt(name));
+		} catch (UnsupportedEncodingException | GeneralSecurityException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		member.setAuthCode((int)(Math.random()*100000) + "m" + id.substring(0, 3));
 		member.setPhoto(photo[0].getOriginalFilename());
 		
@@ -82,7 +98,11 @@ public class HomeController {
 		
 		if(!result) model.addAttribute("msg", "회원가입 실패");
 		else {
-			member = service.selectById(id);
+			try {
+				member = service.selectById(aes.encrypt(id));
+			} catch (UnsupportedEncodingException | GeneralSecurityException e1) {
+				e1.printStackTrace();
+			}
 			File saveFile = new File(dir, photo[0].getOriginalFilename());
 			
 			try {
