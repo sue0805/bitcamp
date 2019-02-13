@@ -137,6 +137,16 @@
 				alert('ERROR');
 			});
 		}
+		
+		function getInfo(){
+			memberService.getInfo(function(member){
+				console.log(member.idx);
+				console.log(member.id);
+				console.log(member.name);
+				console.log(member.password);
+				console.log(member.regDate);
+			})
+		}
 	</script>
 </body>
 </html>

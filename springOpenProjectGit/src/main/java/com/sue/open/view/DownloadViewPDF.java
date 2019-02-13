@@ -28,6 +28,7 @@ public class DownloadViewPDF extends AbstractPdfView{
 		BaseFont bfKorean = BaseFont.createFont(
 				"c:\\windows\\fonts\\batang.ttc,0", BaseFont.IDENTITY_H, BaseFont.EMBEDDED);
 		Font font = new Font(bfKorean);
+		
 		Table table = new Table(6, members.size() + 1);
 		table.setPadding(5);
 		Cell cell = new Cell(new Paragraph("idx",font));
@@ -46,12 +47,12 @@ public class DownloadViewPDF extends AbstractPdfView{
 		table.addCell(cell);
 		table.endHeaders();
 		for (Member m : members) {
-		table.addCell(m.getIdx()+"");
-		table.addCell(m.getId());
-		table.addCell(m.getPassword());
-		table.addCell(m.getName());
-		table.addCell(m.getPhoto());
-		table.addCell(m.getRegDate());
+		table.addCell(new Paragraph(m.getIdx()+"", font));
+		table.addCell(new Paragraph(m.getId(), font));
+		table.addCell(new Paragraph(m.getPassword(), font));
+		table.addCell(new Paragraph(m.getName(), font));
+		table.addCell(new Paragraph(m.getPhoto(), font));
+		table.addCell(new Paragraph(m.getRegDate(), font));
 		}
 		document.add(table);
 		

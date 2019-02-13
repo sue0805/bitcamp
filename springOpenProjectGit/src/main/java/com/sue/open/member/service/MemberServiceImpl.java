@@ -59,8 +59,15 @@ public class MemberServiceImpl implements MemberService {
 	}
 	
 	public boolean signup(Member member) {
+		int code = (int)(Math.random() * 100000);
+		System.out.println(code);
 		
 		try {
+			member.setAuthCode(code + "m" + member.getId().substring(0, member.getId().length() < 3 ? member.getId().length() : 3));
+			member.setId(aes.encrypt(member.getId()));
+			member.setPassword(aes.encrypt(member.getPassword()));
+			member.setName(aes.encrypt(member.getName()));
+			member.setPhoto(member.getAuthCode() + member.getPhoto());
 			mapper.insertMember(member);
 		} catch (Exception e) {
 			e.printStackTrace();
