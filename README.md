@@ -1,7 +1,4 @@
 # bitcamp
 
-JAVA JDBC 프로그래밍 : src/user/EmpDAO.java & Emp.java
-
-사원등록 : webcontent/EmpRegister.jsp
-
-Open Project : webcontent/*
+Spring Open project -> springOpenProjectGit
+// rest api로 회원 관리 구현까지
