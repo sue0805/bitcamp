@@ -33,7 +33,7 @@ public class SecurityTests {
 		
 		List<Member> list = service.getList();
 		list.forEach(m -> {
-			if(m.getIdx() != 28) {
+			if(m.getIdx() == 51 || m.getIdx() == 25) {
 				try {
 					m.setId(aes.encrypt(m.getId()));
 					m.setPassword(aes.encrypt(m.getPassword()));

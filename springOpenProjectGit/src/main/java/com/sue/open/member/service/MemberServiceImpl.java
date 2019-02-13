@@ -108,6 +108,9 @@ public class MemberServiceImpl implements MemberService {
 		int rowCnt = 0;
 		
 		try {
+			member.setId(aes.encrypt(member.getId()));
+			member.setPassword(aes.encrypt(member.getPassword()));
+			member.setName(aes.encrypt(member.getName()));
 			rowCnt = mapper.update(member);
 		} catch(Exception e) {
 			e.printStackTrace();
